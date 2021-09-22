@@ -18,7 +18,7 @@ to run them.
 To set up a VM this way you need to install
 [VirtualBox](https://virtualbox.org) and
 [Vagrant](https://vagrantup.com) and then run
-the following commands (in PowerShell on Windows, terminal on Linux/OSX):
+the following commands (in PowerShell on Windows, terminal on Linux/macOS):
 
 ```console
 vagrant init avenbross/cs301
