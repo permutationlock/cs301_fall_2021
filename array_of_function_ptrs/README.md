@@ -1,4 +1,4 @@
-# Function point in struct
+# Array of function pointers
 
 Here we use an array of function pointers as a fancy way of computing the
 [Collatz function](https://en.wikipedia.org/wiki/Collatz_conjecture) of a
