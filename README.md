@@ -39,3 +39,65 @@ on is shown during the startup process (it will be something like 2200 or 2222).
 ```console
 vagrant ssh-config
 ```
+
+Once you are logged in to the server you need to know a little about Linux to get around. You can run the command `ls` to
+list the files and subdirectories of the current directory. You can use `cd <directory name>` to change directory. For example,
+when you first log in to the server running `ls` shows:
+
+```console
+alpine:~/ls
+cs301_fall_2021
+```
+
+Lets move into the `cs301_fall_2021` folder and see what is inside:
+
+```console
+alpine:~/cd cs301_fall_2021
+alpine:~/cs301_fall_2021/ls
+README.md                             function_ptr
+array_of_function_ptrs                function_ptr_in_struct
+basic_struct_with_asm                 input_index_to_find_in_array
+call_c_function_from_asm              linking_c_and_asm
+construct_and_return_c_struct_in_asm  linking_cpp_and_asm
+count_as_in_string
+```
+
+Next, move into the `linking_c_and_asm` example folder and open the `main.c` file with
+[nano](https://www.nano-editor.org/dist/latest/nano.html) text editor:
+
+```console
+alpine:~/cs301_fall_2021/cd linking_c_and_asm
+alpine:~/cs301_fall_2021/linking_c_and_asm/nano main.c
+```
+
+Press CTRL-X to close the file (select no if asked to save changes). Now let's build
+and run the example:
+
+```console
+alpine:~/cs301_fall_2021/linking_c_and_asm/./build.sh
+alpine:~/cs301_fall_2021/linking_c_and_asm/.run
+assembly returned: 1783
+```
+
+Great, we compiled a C and assembly project and it ran! This created an executable
+and a couple object files (.o files):
+
+```console
+alpine:~/cs301_fall_2021/linking_c_and_asm/ls
+README.md  build.sh   clean.sh   foo.asm    foo.o      main.c     main.o     run
+```
+
+To get rid of these just run the clean script:
+
+```console
+alpine:~/cs301_fall_2021/linking_c_and_asm/./clean.sh
+alpine:~/cs301_fall_2021/linking_c_and_asm$ ls
+README.md  build.sh   clean.sh   foo.asm    main.c
+```
+
+All the other examples can be built the same way (and you can copy a directory to
+start your own project). Some things you might want to look at:
+
+ - [cheat sheet on linux commands](https://www.guru99.com/linux-commands-cheat-sheet.html)
+ - [nano text editor documentation](https://www.nano-editor.org/dist/latest/nano.html)
+ - [vim text editor documentation (if you are brave enough to seek its power)](https://vimhelp.org/)
