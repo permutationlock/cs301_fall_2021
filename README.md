@@ -31,7 +31,7 @@ To log in and start using the machine run:
 ssh -p <port> vagrant@localhost
 ```
 
-Enter the password "cs301" when prompted. The port that the VM is running
+Enter the password "vagrant" when prompted. The port that the VM is running
 on is shown during the startup process (it will be something like 2200 or 2222). If you missed it, you can find it by running:
 
 ```console
