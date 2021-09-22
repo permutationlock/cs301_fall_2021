@@ -5,7 +5,9 @@ Examples for the fall 2021 CS301 class at UAF.
 ## Requirements
 
 All of the examples require an x86_64 machine running a Linux distro with
-[gcc](https://gcc.gnu.org) and [nasm](https://nasm.us) installed.
+[gcc](https://gcc.gnu.org) and [nasm](https://nasm.us) installed. However,
+the readme file in each folder contains a link to run the code on
+[Netrun](http://netrun.cs.uaf.edu/).
 
 ## Vagrant VM
 
