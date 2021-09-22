@@ -103,7 +103,7 @@ start your own project).
 If you are curious as to how each example is built and cleaned you can open those
 script files with `nano` as well and simply read the list of commands they execute.
 
-When you are done, you can close the ssh session by running the command `exit`. This will leave the machine running and you can ssh in later. If you instead want to shut the machine down (all your files will be saved) you can instead run `sudo poweroff`.
+When you are done, you can close the ssh session by running the command `exit`. This will leave the machine running and you can ssh in later. If you instead want to shut the machine down (all your files will be saved, but you will have to re-run `vagrant up` to boot up the machine again) you can instead run `sudo poweroff`.
 
 Some other things you might want to look at:
 
