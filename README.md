@@ -100,7 +100,7 @@ README.md  build.sh   clean.sh   foo.asm    main.c
 All the other examples can be built the same way (and you can copy a directory to
 start your own project).
 
-If you are curious as to how each example is built and clean you can open those
+If you are curious as to how each example is built and cleaned you can open those
 script files with `nano` as well and simply read the list of commands they execute.
 
 Some things you might want to look at:
