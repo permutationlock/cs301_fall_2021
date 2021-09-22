@@ -70,8 +70,10 @@ alpine:~/cs301_fall_2021$ cd linking_c_and_asm
 alpine:~/cs301_fall_2021/linking_c_and_asm$ nano main.c
 ```
 
-Press CTRL-X to close the file (select no if asked to save changes). Now let's build
-and run the example:
+Press CTRL-X to close the file (select no if asked to save changes). You 
+can do the same thing to read `foo.asm` by executing `nano foo.asm`.
+
+Having looked through the code, let's build and run the example:
 
 ```console
 alpine:~/cs301_fall_2021/linking_c_and_asm$ ./build.sh
@@ -96,7 +98,12 @@ README.md  build.sh   clean.sh   foo.asm    main.c
 ```
 
 All the other examples can be built the same way (and you can copy a directory to
-start your own project). Some things you might want to look at:
+start your own project).
+
+If you are curious as to how each example is built and clean you can open those
+script files with `nano` as well and simply read the list of commands they execute.
+
+Some things you might want to look at:
 
  - [cheat sheet on linux commands](https://www.guru99.com/linux-commands-cheat-sheet.html)
  - [nano text editor documentation](https://www.nano-editor.org/dist/latest/nano.html)
