@@ -17,7 +17,11 @@ int main() {
 
   unsigned long x = 0;
   printf("enter a positive integer: \n");
-  scanf("%lu", &x);
+  int scanned = scanf("%lu", &x);
+
+  if(scanned != 1) {
+    exit(1);
+  }
 
   unsigned long n = x;
   unsigned long count = 0;
@@ -26,5 +30,6 @@ int main() {
     ++count;
   }
   printf("it took %lu applications of collatz to reach 1 from %ld\n", count, x);
+
   return 0;
 }

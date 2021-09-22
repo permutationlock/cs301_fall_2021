@@ -1,7 +1,7 @@
-# Function point in struct
+# Array of function pointers
 
 Here we use an array of function pointers as a fancy way of computing the
 [Collatz function](https://en.wikipedia.org/wiki/Collatz_conjecture) of a
 positive (unsigned) integer.
 
- - [main.c on Netrun]()
+ - [main.c on Netrun](https://lawlor.cs.uaf.edu/netrun/run?name=example_c&code=%23include%3Cstdio.h%3E%0D%0A%0D%0Atypedef%20unsigned%20long%20%28%2Acompute_t%29%28unsigned%20long%29%3B%0D%0A%0D%0Aunsigned%20long%20collatz_even%28unsigned%20long%20n%29%20%7B%0D%0A%20%20return%20n%20%2F%202%3B%0D%0A%7D%0D%0A%0D%0Aunsigned%20long%20collatz_odd%28unsigned%20long%20n%29%20%7B%0D%0A%20%20return%203%20%2A%20n%20%2B%201%3B%0D%0A%7D%0D%0A%0D%0Aint%20main%28%29%20%7B%0D%0A%20%20compute_t%20collatz_functions%5B2%5D%3B%0D%0A%20%20collatz_functions%5B0%5D%20%3D%20collatz_even%3B%0D%0A%20%20collatz_functions%5B1%5D%20%3D%20collatz_odd%3B%0D%0A%0D%0A%20%20unsigned%20long%20x%20%3D%200%3B%0D%0A%20%20printf%28%22enter%20a%20positive%20integer%3A%20%5Cn%22%29%3B%0D%0A%20%20int%20scanned%20%3D%20scanf%28%22%25lu%22%2C%20%26x%29%3B%0D%0A%20%20%0D%0A%20%20if%28scanned%20%21%3D%201%29%20%7B%0D%0A%20%20%20%20exit%281%29%3B%0D%0A%20%20%7D%0D%0A%0D%0A%20%20unsigned%20long%20n%20%3D%20x%3B%0D%0A%20%20unsigned%20long%20count%20%3D%200%3B%0D%0A%20%20while%28n%20%21%3D%201%29%20%7B%0D%0A%20%20%20%20n%20%3D%20collatz_functions%5Bn%252%5D%28n%29%3B%0D%0A%20%20%20%20%2B%2Bcount%3B%0D%0A%20%20%7D%0D%0A%20%20printf%28%22it%20took%20%25lu%20applications%20of%20collatz%20to%20reach%201%20from%20%25ld%5Cn%22%2C%20count%2C%20x%29%3B%0D%0A%20%20return%200%3B%0D%0A%7D&lang=C&mach=skylake64&mode=main&input=173&check_input=Input&linkwith=&foo_ret=long&foo_arg0=void&orun=Run&orun=Grade&ocompile=Optimize&ocompile=Warnings)
