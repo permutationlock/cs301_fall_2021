@@ -75,7 +75,7 @@ and run the example:
 
 ```console
 alpine:~/cs301_fall_2021/linking_c_and_asm$ ./build.sh
-alpine:~/cs301_fall_2021/linking_c_and_asm$ .run
+alpine:~/cs301_fall_2021/linking_c_and_asm$ ./run
 assembly returned: 1783
 ```
 
