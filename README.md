@@ -97,8 +97,7 @@ alpine:~/cs301_fall_2021/linking_c_and_asm$ ls
 README.md  build.sh   clean.sh   foo.asm    main.c
 ```
 
-All the other examples can be built the same way (and you can copy a directory to
-start your own project).
+All the other examples can be built the same way (and you can copy a directory to start your own project). I would recommend not modifying the files in the `cs301_fall_2021` directory if you are not experienced with git. I will be updating the repo and if you modify the files, pulling updates will cause merge conflicts. Instead make copies of examples by running `cp -r directory_to_copy copy_name`.
 
 If you are curious as to how each example is built and cleaned you can open those
 script files with `nano` as well and simply read the list of commands they execute.
