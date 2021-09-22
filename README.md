@@ -1,4 +1,4 @@
-# cs301_fall_2021
+# CS301 Fall 2021
 
 Examples for the fall 2021 CS301 class at UAF.
 
@@ -9,12 +9,16 @@ All of the examples require an x86_64 machine running a Linux distro with
 
 ## Vagrant VM
 
-A [Vagrant] box [avenbross/cs301] is available with Alpine Linux,
+A [Vagrant](https://vagrantup.com) box
+[avenbross/cs301](https://app.vagrantup.com/avenbross/boxes/cs301)
+is available with [Alpine Linux](https://alpinelinux.org),
 all of these examples in this repo, and the packages required
 to run them.
 
 To set up a VM this way you need to install
-[VirtualBox] and [Vagrant] and then run the following commands (in PowerShell on Windows, terminal on Linux/OSX):
+[VirtualBox](https://virtualbox.org) and
+[Vagrant](https://vagrantup.com) and then run
+the following commands (in PowerShell on Windows, terminal on Linux/OSX):
 
 ```console
 vagrant init avenbross/cs301
