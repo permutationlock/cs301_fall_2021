@@ -1,1 +1,1 @@
-rm foo.o main.o run
+rm call_func.o main.o run
