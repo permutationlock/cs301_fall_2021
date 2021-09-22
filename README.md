@@ -103,7 +103,9 @@ start your own project).
 If you are curious as to how each example is built and cleaned you can open those
 script files with `nano` as well and simply read the list of commands they execute.
 
-Some things you might want to look at:
+When you are done, you can close the ssh session by running the command `exit`. This will leave the machine running and you can ssh in later. If you instead want to shut the machine down (all your files will be saved) you can instead run `sudo poweroff`.
+
+Some other things you might want to look at:
 
  - [cheat sheet on linux commands](https://www.guru99.com/linux-commands-cheat-sheet.html)
  - [nano text editor documentation](https://www.nano-editor.org/dist/latest/nano.html)
