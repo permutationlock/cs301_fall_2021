@@ -7,6 +7,6 @@ long bar() {
 }
 
 int main() {
-  printf("assembly returned: %ld\n", foo(bar));
+  printf("assembly returned: %ld\n", foo());
   return 0;
 }
