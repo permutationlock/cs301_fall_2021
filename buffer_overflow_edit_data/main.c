@@ -12,7 +12,9 @@ void get_balance(struct bank_account* acc) {
 
 void update_pin(struct bank_account* acc) {
   printf("enter your new pin:\n");
-  scanf("%s", acc->pin);
+  if(1 != scanf("%s", acc->pin)) {
+    printf("invalid pin\n");
+  }
 }
 
 void manage_account(struct bank_account* acc) {
@@ -20,12 +22,19 @@ void manage_account(struct bank_account* acc) {
   while(1) {
     printf("Very Secure Bank:\n\t1:\tget balance\n\t2:\tupdate pin\n\t0:\texit\n");
     printf("Enter an action:\n");
-    scanf("%d", &option);
+    if(1 != scanf("%d", &option)) {
+      printf("invalid input\n");
+      continue;
+    }
     if(option <= 0 || option > 2) break;
 
     char pin[5];
     printf("enter your pin:\n");
-    scanf("%s", pin);
+    if(1 != scanf("%s", pin)) {
+      printf("invalid input\n");
+      continue;
+    }
+    
     for(int i = 0; i < 4; ++i) {
       if(acc->pin[i] != pin[i]) {
         printf("incorrect pin: %s\n", pin);
