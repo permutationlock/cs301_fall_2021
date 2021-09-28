@@ -1,0 +1,1 @@
+rm main.o run
