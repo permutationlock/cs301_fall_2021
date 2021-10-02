@@ -2,6 +2,6 @@
 
 Here are a few examples of using floating point numbers in x86 assembly.
 
- - [ret_float.asm on Netrun]()
- - [add_floats.asm on Netrun]()
- - [compare_floats.asm on Netrun]()
+ - [ret_float.asm on Netrun](https://lawlor.cs.uaf.edu/netrun/run?name=example_asm&code=%3B%20movss%20copies%20a%20single%20precision%20%2832%20bit%29%20float%0D%0Amovss%20xmm0%2C%20%5Bmy_float%5D%0D%0A%3B%20xmm0%20is%20the%20return%20register%20for%20floating%20point%0D%0Aret%0D%0A%0D%0Amy_float%3A%0D%0A%20%20dd%203.1415&lang=Assembly-NASM&mach=skylake64&mode=frag&input=&linkwith=&foo_ret=float&foo_arg0=void&orun=Run&orun=Grade&ocompile=Optimize&ocompile=Warnings)
+ - [add_floats.asm on Netrun](https://lawlor.cs.uaf.edu/netrun/run?name=example_asm&code=%3B%20the%20first%208%20floating%20point%20arguments%20go%20in%20xmm0-xmm7%0D%0Aaddss%20xmm0%2C%20xmm1%0D%0A%3B%20xmm0%20is%20the%20return%20register%20for%20floating%20point%0D%0Aret&lang=Assembly-NASM&mach=skylake64&mode=frag&input=&linkwith=&foo_ret=float&foo_arg0=void&orun=Run&orun=Grade&ocompile=Optimize&ocompile=Warnings)
+ - [compare_floats.asm on Netrun](https://lawlor.cs.uaf.edu/netrun/run?name=example_asm&code=%20%20%3B%20the%20first%208%20floating%20point%20arguments%20go%20in%20xmm0-xmm7%0D%0A%20%20ucomiss%20xmm0%2C%20xmm1%0D%0A%20%20%3B%20floating%20point%20compares%20use%20the%20unsigned%20flags%0D%0A%20%20%3B%20-%3E%20thus%20you%20need%20to%20use%20ja%2C%20jb%20instead%20of%20jg%2C%20jl%0D%0A%20%20ja%20return0%0D%0A%20%20mov%20rax%2C%201%0D%0A%20%20ret%0D%0Areturn0%3A%0D%0A%20%20mov%20rax%2C%200%0D%0A%20%20ret&lang=Assembly-NASM&mach=skylake64&mode=frag&input=1.2%2C%203.4&check_input=Input&linkwith=&foo_ret=float&foo_arg0=void&orun=Run&orun=Grade&ocompile=Optimize&ocompile=Warnings)
