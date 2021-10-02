@@ -1,0 +1,5 @@
+
+Hex dump of section '.rodata':
+  0x00000000 61737365 6d626c79 20726574 75726e65 assembly returne
+  0x00000010 643a2025 6c640a00                   d: %ld..
+
