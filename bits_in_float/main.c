@@ -48,6 +48,8 @@ int main() {
   print_float_dissection(3.0);
   print_float_dissection(1.0/2.0);
   print_float_dissection(0.1);
+  print_float_dissection(13.3125);
+  print_float_dissection(100.0);
   print_float_dissection(0.0);
 
   print_float_dissection(1.0/0.0);
