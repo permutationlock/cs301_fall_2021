@@ -1,7 +1,7 @@
 # Optimizing robot vision height conversion
 
-In this example we show several levels of optimization for a larger
-scale floating point computation. For details on what the code is trying
+In this example we show several levels of optimization for a floating point
+computation. For details on what the code is trying
 to achieve see [the lecture notes]().
 
 If we build with all constants as doubles and no optimization (gcc -O0),
