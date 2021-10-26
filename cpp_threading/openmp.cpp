@@ -1,8 +1,6 @@
-long collatz_count(long);
-
-void collatz_openmp(long* collatz_numbers, long size) {
+void openmp(long(*f)(long), long* collatz_numbers, long size) {
   #pragma omp parallel for
   for(long i = 0; i < size; ++i) {
-    collatz_numbers[i] = collatz_count(i+1);
+    collatz_numbers[i] = f(i+1);
   }
 }

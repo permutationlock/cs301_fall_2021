@@ -1,15 +1,17 @@
 #include <algorithm>
 #include <execution>
+#include <cstdio>
 
-long collatz_count(long);
-
-void collatz_std_execution(long* collatz_numbers, long size) {
+void std_execution(long(*f)(long), long* collatz_numbers, long size) {
+  for(long i = 0; i < size; ++i) {
+    collatz_numbers[i] = i;
+  }
   std::for_each(
       std::execution::par,
-      collatz_numbers,
-      collatz_numbers + size,
+      &collatz_numbers[0],
+      &collatz_numbers[size],
       [=](long i) {
-        collatz_numbers[i] = collatz_count(i+1);
+        collatz_numbers[i] = f(i+1);
       }
     );
 }

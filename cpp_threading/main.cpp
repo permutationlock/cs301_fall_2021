@@ -2,11 +2,17 @@
 #include<chrono>
 #include<vector>
 #include<algorithm>
+#include<functional>
 
-typedef long (*timeable_fn)(void);
+typedef std::function<long(void)> timeable_fn;
 
-void collatz_std_thread(long*, long, long);
-void collatz_openmp(long*, long);
+long collatz_count(long);
+long sqrt_count(long);
+
+void std_thread(long(*)(long), long*, long, long);
+void openmp(long(*)(long), long*, long);
+void std_execution(long(*)(long), long*, long);
+void work_queue(long(*)(long), long*, long, long);
 
 long get_time_ns() {
   auto now = std::chrono::system_clock::now();
@@ -15,7 +21,7 @@ long get_time_ns() {
   return value.count();
 }
 
-double time_function_onepass(timeable_fn fn) {
+double time_function_onepass(const timeable_fn & fn) {
   unsigned int i,count=1;
   double timePer=0;
   for (count=1;count!=0;count*=2) {
@@ -32,7 +38,7 @@ double time_function_onepass(timeable_fn fn) {
   return timePer;
 }
 
-double time_function(timeable_fn fn) {
+double time_function(const timeable_fn & fn) {
   enum { ntimes=7 };
   double times[ntimes];
   for (int t=0;t<ntimes;t++)
@@ -48,29 +54,98 @@ int empty_func() {
 const long size = 1000000;
 long collatz_numbers[1000000];
 
-long time_collatz_one_thread() {
-  collatz_std_thread(collatz_numbers, size, 1);
+void clear_array() {
+  for(std::size_t i = 0; i < size; ++i) {
+    collatz_numbers[i] = 0;
+  }
+}
+
+long check_correctness(long(*f)(long)) {
+  long sum = 0;
+  for(std::size_t i = 0; i < size; ++i) {
+    if(collatz_numbers[i] == f(i+1)) {
+      ++sum;
+    }
+  }
+  
+  return sum;
+}
+
+long time_one_thread_collatz() {
+  std_thread(collatz_count, collatz_numbers, size, 1);
   return 0;
 }
 
-long time_collatz_four_threads() {
-  collatz_std_thread(collatz_numbers, size, 4);
+long time_one_thread(long(*f)(long)) {
+  std_thread(f, collatz_numbers, size, 1);
   return 0;
 }
 
-long time_collatz_openmp() {
-  collatz_openmp(collatz_numbers, size);
+long time_four_threads(long(*f)(long)) {
+  std_thread(f, collatz_numbers, size, 4);
   return 0;
 }
 
-long time_collatz_std_execution() {
-  collatz_openmp(collatz_numbers, size);
+long time_openmp(long(*f)(long)) {
+  openmp(f, collatz_numbers, size);
   return 0;
+}
+
+long time_std_execution(long(*f)(long)) {
+  std_execution(f, collatz_numbers, size);
+  return 0;
+}
+
+long time_work_queue_ten(long(*f)(long)) {
+  work_queue(f, collatz_numbers, size, 10);
+  return 0;
+}
+
+long time_work_queue_hundred(long(*f)(long)) {
+  work_queue(f, collatz_numbers, size, 100);
+  return 0;
+}
+
+long time_work_queue_thousand(long(*f)(long)) {
+  work_queue(f, collatz_numbers, size, 1000);
+  return 0;
+}
+
+void thread_experiment(
+    long(*f)(long),
+    const std::vector<std::string>& test_names,
+    const std::vector<long(*)(long(*)(long))>& test_functions
+  )
+{
+  for(std::size_t i = 0; i < test_names.size(); ++i) {
+    clear_array();
+    std::cout << test_names[i] << " -> " << time_function(std::bind(test_functions[i], f)) / 1000000.0 << "ms\n";
+    std::cout << "    correct: " << check_correctness(f) << "\n";
+  }
 }
 
 int main() {
-  std::cout << "No threading -> " << time_function(time_collatz_one_thread) / 1000000.0 << "ms\n";
-  std::cout << "4 std::threads -> " << time_function(time_collatz_four_threads) / 1000000.0 << "ms\n";
-  std::cout << "openmp -> " << time_function(time_collatz_openmp) / 1000000.0 << "ms\n";
-  std::cout << "std::execution:par -> " << time_function(time_collatz_std_execution) / 1000000.0 << "ms\n";
+  std::vector<std::string> test_names;
+  std::vector<long(*)(long(*)(long))> test_functions;
+  
+  test_names.push_back("one thread");
+  test_functions.push_back(time_one_thread);
+  test_names.push_back("four threads");
+  test_functions.push_back(time_four_threads);
+  test_names.push_back("OpenMP");
+  test_functions.push_back(time_openmp);
+  test_names.push_back("std::execution");
+  test_functions.push_back(time_std_execution);
+  test_names.push_back("work_queue 10-at-a-time");
+  test_functions.push_back(time_work_queue_ten);
+  test_names.push_back("work_queue 100-at-a-time");
+  test_functions.push_back(time_work_queue_hundred);
+  test_names.push_back("work_queue 1000-at-a-time");
+  test_functions.push_back(time_work_queue_thousand);
+
+  std::cout << "Collatz count:\n";
+  thread_experiment(collatz_count, test_names, test_functions);
+  std::cout << "\n";
+  std::cout << "Sqrt count:\n";
+  thread_experiment(sqrt_count, test_names, test_functions);
 }
