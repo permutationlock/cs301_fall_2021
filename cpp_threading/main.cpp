@@ -33,7 +33,7 @@ double time_function_onepass(timeable_fn fn) {
 }
 
 double time_function(timeable_fn fn) {
-  enum { ntimes=3 };
+  enum { ntimes=7 };
   double times[ntimes];
   for (int t=0;t<ntimes;t++)
     times[t]=time_function_onepass(fn);
@@ -63,8 +63,14 @@ long time_collatz_openmp() {
   return 0;
 }
 
+long time_collatz_std_execution() {
+  collatz_openmp(collatz_numbers, size);
+  return 0;
+}
+
 int main() {
-  std::cout << time_function(time_collatz_one_thread) << "\n";
-  std::cout << time_function(time_collatz_four_threads) << "\n";
-  std::cout << time_function(time_collatz_openmp) << "\n";
+  std::cout << "No threading -> " << time_function(time_collatz_one_thread) / 1000000.0 << "ms\n";
+  std::cout << "4 std::threads -> " << time_function(time_collatz_four_threads) / 1000000.0 << "ms\n";
+  std::cout << "openmp -> " << time_function(time_collatz_openmp) / 1000000.0 << "ms\n";
+  std::cout << "std::execution:par -> " << time_function(time_collatz_std_execution) / 1000000.0 << "ms\n";
 }

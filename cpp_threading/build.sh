@@ -1,4 +1,4 @@
-g++ -std=c++17 -c main.cpp
+g++ -std=c++17 -O3 -c main.cpp
 g++ -std=c++17 -O3 -c std_thread.cpp
 g++ -std=c++17 -O3 -pthread -ltbb -c std_execution.cpp
 g++ -std=c++17 -fopenmp -O3 -c openmp.cpp
