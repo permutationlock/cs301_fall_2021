@@ -1,18 +1,18 @@
 #include <thread>
 #include <vector>
+#include <utility>
 #include <queue>
 #include <mutex>
-#include <numeric>
 
 static void do_work(
     long(*f)(long),
     long* results,
-    std::queue<std::vector<long> >* work,
+    std::queue<std::pair<long,long> >* work,
     std::mutex* lock
   )
 {
   while(1) {
-    std::vector<long> interval;
+    std::pair<long,long> interval;
     {
       std::lock_guard<std::mutex> guard(*lock);
       if(!work->empty()) {
@@ -23,7 +23,7 @@ static void do_work(
       }
     }
 
-    for(long x : interval) {
+    for(long x = interval.first; x < interval.second; ++x) {
       results[x] = f(x+1);
     }
   }
@@ -38,13 +38,11 @@ void work_queue(
 {
   const std::size_t nthreads = 4;
   std::vector<std::thread> threads;
-  std::queue<std::vector<long> > work;
+  std::queue<std::pair<long,long> > work;
   std::mutex lock;
 
-  std::vector<long> range(interval);
   for(long i = 0; i < size / interval; ++i) {
-    std::iota(range.begin(), range.end(), i * interval);
-    work.push(range);
+    work.emplace(i*interval, (i+1)*interval);
   }
 
   for(std::size_t i = 0; i < nthreads - 1; ++i) {

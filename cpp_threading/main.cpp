@@ -7,7 +7,6 @@
 typedef std::function<long(void)> timeable_fn;
 
 long collatz_count(long);
-long sqrt_count(long);
 
 void std_thread(long(*)(long), long*, long, long);
 void openmp(long(*)(long), long*, long);
@@ -51,8 +50,8 @@ int empty_func() {
   return 0;
 }
 
-const long size = 1000000;
-long results[1000000];
+const long size = 10000000;
+long results[10000000];
 
 void clear_array() {
   for(std::size_t i = 0; i < size; ++i) {
@@ -146,7 +145,4 @@ int main() {
 
   std::cout << "Collatz count:\n";
   thread_experiment(collatz_count, size, test_names, test_functions);
-  std::cout << "\n";
-  std::cout << "Sqrt count:\n";
-  thread_experiment(sqrt_count, size/1000, test_names, test_functions);
 }

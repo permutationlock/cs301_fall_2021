@@ -4,5 +4,4 @@ g++ -std=c++17 -O3 -c work_queue.cpp
 g++ -std=c++17 -O3 -pthread -ltbb -c std_execution.cpp
 g++ -std=c++17 -fopenmp -O3 -c openmp.cpp
 g++ -std=c++17 -O3 -c collatz.cpp
-g++ -std=c++17 -O0 -c sqrt_count.cpp
-g++ -std=c++17 -ltbb -pthread -fopenmp -o run collatz.o sqrt_count.o std_execution.o openmp.o work_queue.o std_thread.o main.o
+g++ -std=c++17 -ltbb -pthread -fopenmp -o run collatz.o std_execution.o openmp.o work_queue.o std_thread.o main.o
