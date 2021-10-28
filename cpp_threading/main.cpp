@@ -46,10 +46,6 @@ double time_function(const timeable_fn & fn) {
   return times[ntimes/2]; // == median of the runs
 }
 
-int empty_func() {
-  return 0;
-}
-
 const long size = 10000000;
 long results[10000000];
 
@@ -68,11 +64,6 @@ long check_correctness(long(*f)(long), long s) {
   }
   
   return sum;
-}
-
-long time_one_thread_collatz(long s) {
-  std_thread(collatz_count, results, s, 1);
-  return 0;
 }
 
 long time_one_thread(long(*f)(long), long s) {
@@ -119,8 +110,12 @@ void thread_experiment(
 {
   for(std::size_t i = 0; i < test_names.size(); ++i) {
     clear_array();
-    std::cout << test_names[i] << " -> " << time_function(std::bind(test_functions[i], f, s)) / 1000000.0 << "ms\n";
-    std::cout << "    correct: " << check_correctness(f, s) << "\n";
+    std::cout << test_names[i] << " -> "
+      << time_function(std::bind(test_functions[i], f, s)) / 1000000.0
+      << "ms\n";
+    std::cout << "    correct: "
+      << check_correctness(f, s)
+      << "/" << s << "\n";
   }
 }
 
