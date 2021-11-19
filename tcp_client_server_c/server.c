@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   serv.sin_port = htons(PORTNUM);
 
   //socket used to listen for incoming connections
-  int mysocket = socket(AF_INET, SOCK_STREAM, 6); 
+  int mysocket = socket(AF_INET, SOCK_STREAM, 0); 
 
   // bind serv information to mysocket
   bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr_in));
