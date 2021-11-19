@@ -6,8 +6,10 @@
 #include <sys/socket.h> // contains socket, connect, accept syscalls
 #include <netinet/in.h> // needed for sockaddr_in
 
-#define MAXRCVLEN 500
-#define PORTNUM 2300
+enum {
+  MAXRCVLEN = 500,
+  PORTNUM = 2300
+};
 
 int main(int argc, char *argv[])
 {

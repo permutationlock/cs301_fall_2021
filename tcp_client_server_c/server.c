@@ -6,7 +6,7 @@
 #include <sys/socket.h> // contains socket, connect, accept syscalls
 #include <netinet/in.h> // needed for sockaddr_in
 
-#define PORTNUM 2300
+enum { PORTNUM = 2300 };
 
 int main(int argc, char *argv[])
 {
@@ -19,9 +19,13 @@ int main(int argc, char *argv[])
   serv.sin_family = AF_INET;                
 
   // set our address to accept connections on any interface
+  // htonl is named for Host TO Network Long
+  //  -> it reverses the bit order of a long's binary representation
   serv.sin_addr.s_addr = htonl(INADDR_ANY); 
 
   // set the server port number
+  // htons is named for Host TO Network Short
+  // -> it works the same as htonl but for short (16 bit) numbers
   serv.sin_port = htons(PORTNUM);
 
   //socket used to listen for incoming connections

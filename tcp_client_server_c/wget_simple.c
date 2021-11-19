@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     unsigned short server_port = 80;
 
     // Create a tcp socket
-    mysocket = socket(AF_INET, SOCK_STREAM, 6);
+    mysocket = socket(AF_INET, SOCK_STREAM, 0);
 
     // Build the address
     in_addr = inet_addr("93.184.216.34");
