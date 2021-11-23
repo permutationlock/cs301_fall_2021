@@ -1,1 +1,1 @@
-rm client server wget_simple echo_client echo_server echo_server_clone
+rm client server wget_simple echo_client echo_server echo_server_clone clone_example

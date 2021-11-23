@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
   while(1) {
     // zero out the buffer before we read in data
-    memset(buffer, 0, MAXRCVLEN);
+    memset(buffer, 0, MAXRCVLEN + 1);
 
     // read up to MAXRCVLEN bytes from stdin
     len = read(0, buffer, MAXRCVLEN);
@@ -74,19 +74,25 @@ int main(int argc, char *argv[])
     // send our newly read string to the server via our socket fd
     len = write(mysocket, buffer, len);
 
-    printf("Sent %d bytes: %s\n", len, buffer);
-
-    // read up to MAXRCVLEN bytes from the socket connected to the server
-    len = read(mysocket, buffer, MAXRCVLEN);
-
     // if zero bytes were read, the connection has closed
     if(len <= 0) {
       printf("Connection closed by server.\n");
       break;
     }
 
+    printf("Sent %d bytes: %s\n", len, buffer);
+
+    // read up to MAXRCVLEN bytes from the socket connected to the server
+    len = read(mysocket, buffer, MAXRCVLEN);
+
+    // if zero bytes were written, the connection has closed
+    if(len <= 0) {
+      printf("Connection closed by server.\n");
+      break;
+    }
+
     // add a final null terminator in case the server didn't add one
-    buffer[len] = '\0';
+    buffer[len] = 0;
 
     printf("Received %d bytes: %s\n", len, buffer);
   }

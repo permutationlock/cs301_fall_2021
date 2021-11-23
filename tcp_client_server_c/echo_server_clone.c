@@ -32,6 +32,7 @@ struct thread_data {
 // any messages received on the socket
 int echo_on_socket(void* args) {
   int confd = *((int*) args);
+  printf("got fd: %d\n", confd);
   int len = 0;
   char buff[MAXRECVLEN + 1];
 
@@ -65,7 +66,7 @@ int main(int argc, char *argv[])
   struct sockaddr_in serv;
 
   // zero the struct before filling the fields
-  memset(&serv, 0, sizeof(serv));           
+  memset(&serv, 0, sizeof(serv));
 
   // set the type of connection to TCP/IP
   serv.sin_family = AF_INET;                
@@ -85,15 +86,6 @@ int main(int argc, char *argv[])
 
   // bind serv information to mysocket
   bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr_in));
-
-  // allocate space to store data for each connection
-  struct thread_data* conn_data = 
-      (struct thread_data*) malloc(MAXCONS * sizeof(struct thread_data));
-
-  // the connection file descriptor will always be index + START_FD
-  for(int i = 0; i < MAXCONS; ++i) {
-    conn_data[i].confd = i + START_FD;
-  }
 
   // socket info about the machine connecting to us
   struct sockaddr_in dest;
@@ -115,21 +107,17 @@ int main(int argc, char *argv[])
     printf("Incoming connection from %s assigned to %d\n",
         inet_ntoa(dest.sin_addr), confd);
 
-    // compute the index of the new connection from its file descriptor
-    int i = confd - START_FD;
+    struct thread_data* data = (struct thread_data*) malloc(sizeof(struct thread_data));
+    memset(data, 0, sizeof(struct thread_data));
+    data->confd = confd;
 
-    if(i > MAXCONS) {
-      printf("Reached maximum number of connections, terminating latest connection.");
-      close(confd);
-    } else {
-      // create a thread to echo on the new connection
-      clone(
-          echo_on_socket,
-          conn_data[i].stack + STACK_SIZE,
-          CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND,
-          &(conn_data[i].confd)
-        );
-    }
+    // create a thread to echo on the new connection
+    clone(
+        echo_on_socket,
+        data->stack + STACK_SIZE,
+        CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND,
+        &(data->confd)
+      );
   }
 
   close(mysocket);

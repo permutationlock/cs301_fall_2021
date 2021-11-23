@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include <unistd.h> // contains read/write sycalls
-#include <pthread.h>
 
 #include <sys/socket.h> // contains socket, connect, accept syscalls
 
