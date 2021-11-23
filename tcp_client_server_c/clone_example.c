@@ -14,7 +14,8 @@ enum {
 };
 
 int do_work(void* args) {
-  printf("hello from thread!\n");
+  char buffer[] = "hello from thread\n";
+  write(1, buffer, strlen(buffer));
   return 0;
 }
 
@@ -25,7 +26,8 @@ int main()
   clone(do_work, stack + STACK_SIZE,
       CLONE_FS | CLONE_SIGHAND | CLONE_FILES | CLONE_VM | SIGCHLD, NULL);
  
-  printf("hello from main process!\n");
+  char buffer[] = "hello from main\n";
+  write(1, buffer, strlen(buffer));
   
   int result = 0;
   wait(&result);
