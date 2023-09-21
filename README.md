@@ -1,6 +1,7 @@
 # CS301 Fall 2021
 
-Examples for the fall 2021 CS301 class at UAF.
+Examples for the [Fall 2021 CS301 class](https://docs.google.com/document/d/e/2PACX-1vQOy_S-NkOwHxovtzo13BQloFZsio_FGmOzj7eXg_fF6c2-rWomY468IYcbJ6s0O7qiVXOg3BHcm86R/pub)
+at UAF.
 
 ## Requirements
 
